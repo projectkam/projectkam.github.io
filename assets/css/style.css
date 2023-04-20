@@ -34,13 +34,13 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   visibility: hidden;
   opacity: 0;
-  left: 15px;
-  bottom: 15px;
+  right: 60px;
+  bottom: 10px;
   z-index: 996;
   background: #004d40;
   /* background: #0563bb; */
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50px;
   transition: all 0.4s;
 }
@@ -536,6 +536,7 @@ section {
 --------------------------------------------------------------*/
 .portfolio .portfolio-item {
   margin-bottom: 30px;
+
 }
 .portfolio #portfolio-flters {
   padding: 0;
@@ -555,11 +556,14 @@ section {
   line-height: 1;
   text-transform: uppercase;
   color: #272829;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
   transition: all 0.3s ease-in-out;
 }
 .portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
-  color: #004d40;
+  /* color: #004d40; */
+  background: darkslategray;
+  border-radius: 2px;
+  color: white;
 }
 .portfolio #portfolio-flters li:last-child {
   margin-right: 0;
@@ -570,6 +574,7 @@ section {
   overflow: hidden;
   z-index: 1;
   background: rgba(69, 80, 91, 0.8);
+  border-radius: 10px;
 }
 .portfolio .portfolio-wrap::before {
   content: "";
@@ -1072,4 +1077,38 @@ section {
 }
 #footer .credits {
   font-size: 13px;
+}
+
+.disabled-event {
+  /* pointer-events: none; */
+  /* opacity: 0.8; */
+}
+
+.btn-enabled {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  width: auto;
+  background: white;
+  padding: 5px;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.bloked-div {
+  position: absolute;
+  height: 100%;
+  /* height: 500px; */
+  width: 100%;
+  border: 5px solid #ffffff85;
+  background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      #ffffff85 20px,
+      #ffffff85 50px
+    );
+  border-radius: 10px;
 }
