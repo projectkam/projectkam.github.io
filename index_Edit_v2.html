@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Abdull Jabbar [EDIT DATA]</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/family-chart.css" />
+  <link rel="stylesheet" href="https://unpkg.com/family-chart@0.2.1/dist/styles/family-chart.css">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- <script src="https://example.com/fontawesome/v6.2.1/js/fontawesome.js" data-auto-replace-svg="nest"></script>
+  <script src="https://example.com/fontawesome/v6.2.1/js/solid.js"></script>
+  <script src="https://example.com/fontawesome/v6.2.1/js/brands.js"></script>
+  <script src="https://example.com/fontawesome/v6.2.1/js/all.js" data-auto-replace-svg="nest"></script> -->
+
+  <!-- Tree File -->
+  <script src="https://unpkg.com/d3@6"></script>
+  <!-- <script type="module" src="https://unpkg.com/family-chart@0.2.1"></script> -->
+  <link rel="stylesheet" href="https://unpkg.com/family-chart@0.2.1/dist/styles/family-chart.css">
+
+  <!-- <style>
+      #f3Canvas {
+        position: absolute !important;
+      }
+  </style> -->
+
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex flex-column justify-content-center">
+
+    <nav id="navbar" class="navbar nav-menu">
+      <ul>
+        <!-- <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i><span>Beranda</span></a></li> -->
+        <li><a href="#silsilah" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Sisilah</span></a>
+        </li>
+        <!-- <li><a href="#galery" class="nav-link scrollto"><i class="bx bx-image"></i> <span>Galeri</span></a></li> -->
+      </ul>
+    </nav><!-- .nav-menu -->
+
+  </header><!-- End Header -->
+
+  <main id="main">
+    <!-- ======= Resume Section ======= -->
+    <!-- <section id="resume" class="resume">
+      <div class="container" data-aos="fade-up"> -->
+    <section id="silsilah" class="portfolio section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Silsilah</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
+
+        <div class="row">
+          <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <ul id="portfolio-flters" class="col-sm-12 d-flex"
+                  style="overflow: auto;
+                  justify-content: space-between;
+                  background: whitesmoke;
+                  padding: 0px !important;">
+              <li onclick="openTree('fam1')">H.Sakur</li>
+              <li onclick="openTree('fam2')">Dasirah</li>
+              <li onclick="openTree('fam3')">Jamilah</li>
+              <li onclick="openTree('fam4')">Asfirah</li>
+              <li onclick="openTree('fam5')">Dasiyem</li>
+              <li onclick="openTree('fam6')">Dasiah</li>
+              <li onclick="openTree('fam7')">Abdul Manan</li>
+              <li onclick="openTree('fam8')">Musringah</li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="row container" data-aos-delay="200" id="viewTree" style="min-height: 600px;"></div> -->
+        <div id="noselectedfam" class="copyright">Pilih <strong><span>punjer</span></strong></div>
+        <div id="familychart" class="row container f3" data-aos-delay="200"
+          style="width:100%;
+                height: auto !important;
+                margin:auto;
+                color:#fff;">
+        </div>
+
+        <!-- Add JSON Viewer Section Below the Family Chart -->
+        <div id="jsonViewer" class="row container f3"
+        style="display: none; width: 95%; height: 500px; overflow-y: auto; background: #f4f4f4; color: black; padding: 10px; border-top: 1px solid #ccc; margin-top: 20px;">
+          <button id="copyButton" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; width: 150px;">
+            Copy Data
+          </button>
+          <pre id="jsonContent"></pre>
+          <!-- Add Copy Data Button -->
+          
+      </div>
+      </div>
+    </section>
+    <!-- End Resume Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>projectkam</span></strong>
+        <!-- <p><i class="bi bi-envelope"></i> projectkam@gmail.com</p>. -->
+      </div>
+      <div class="credits">
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/famdata.js"></script>
+  <script src="assets/js/data-family/fam-1.js"></script>
+  <script src="assets/js/data-family/fam-2.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="https://unpkg.com/d3@6"></script>
+  <!-- <script src="https://unpkg.com/family-chart"></script> -->
+  <script type="module" src="https://unpkg.com/family-chart@0.2.1"></script>
+
+
+  <!-- Script -->
+  <script type="text/javascript">
+    // openTree('fam1')
+    function openTree(famType) {
+      var thisView = `<div class="col-lg-12 col-sm-12 portfolio-item filter-fam1 disabled-event" id="${famType}">
+                          <div class="resume" data-aos="fade-up">
+                            <div id="bloked" style="z-index: 1" class="bloked-div"></div>
+                              <div class="col-lg-12">
+                                  <div class="col-lg-12 col-sm-12 f3" id="fam-data"></div>
+                              </div>
+                          </div>
+                      </div>`
+      
+      $(`#familychart`).html(thisView)
+      $(`#bloked`).hide()
+      $(`#noselectedfam`).hide()
+      $(`#jsonViewer`).show()
+      // $(`btn${famType}`).hide()
+      // $(`#bloked`).slideDown(1500)
+      // $(`btn${famType}`).fadeIn(1500)
+
+      // console.log(famType);
+
+      fetch(`assets/json/${famType}_data.json`)  // Adjust the path as needed based on your project structure
+      // fetch('https://drive.google.com/file/d/1nFVhWlYts5tqu0SttdA-7aDG4u7vJRHR/view?usp=sharing')
+        .then(res => res.json())
+        .then(data => create(data))
+        .catch(err => console.error(err));
+      }
+
+      create(data())
+
+      function create(data) {
+
+        const f3Chart = f3.createChart('#fam-data', data)
+          .setTransitionTime(1000)
+          .setCardXSpacing(250)
+          .setCardYSpacing(150)
+          .setOrientationVertical()
+          .setSingleParentEmptyCard(true, {label: 'ADD'})
+      
+        const f3Card = f3Chart.setCard(f3.CardHtml)
+          .setCardDisplay([["first name","last name"],["birthday"]])
+          .setCardDim({})
+          .setMiniTree(true)
+          .setStyle('imageRect')
+          .setOnHoverPathToMain()
+      
+        const f3EditTree = f3Chart.editTree()
+          .fixed(true)
+          .setFields(["first name","last name","birthday","avatar"])
+          .setEditFirst(true)
+        
+        f3EditTree.setEdit()
+        
+        f3Card.setOnCardClick((e, d) => {
+          f3EditTree.open(d)
+          if (f3EditTree.isAddingRelative()) return
+          f3Card.onCardClickDefault(e, d)
+          console.log('setOnCardClick e')
+          console.log(e)
+          console.log('setOnCardClick d')
+          console.log(d)
+        })
+
+        f3Chart.updateTree({initial: true})
+        f3EditTree.open(f3Chart.getMainDatum())
+        f3Chart.updateTree({initial: true})
+        // f3Chart.store.getData()
+
+        // f3EditTree.datumCallback = f3SubmitCallback
+
+        console.log('XXXXX')
+        displayJSON(data);
+      }
+
+      function data() {
+        fetch(`assets/json/fam1_data.json`)  // Adjust the path as needed based on your project structure
+          .then(res => res.json())
+          .then(data => create(data))
+          .catch(err => console.error(err));
+      }
+
+      function f3SubmitCallback(datum){
+          console.log(datum)
+      }
+
+      function displayJSON(data) {
+        // Display formatted JSON data in the #jsonViewer section
+        const jsonContent = document.getElementById('jsonContent');
+        jsonContent.textContent = JSON.stringify(data, null, 2);  // Pretty-print JSON with indentation of 2
+
+        // Add the copy button functionality
+        const copyButton = document.getElementById('copyButton');
+        copyButton.addEventListener('click', () => {
+            copyToClipboard(jsonContent.textContent);
+        });
+      }
+
+      // Function to copy the content to clipboard
+      function copyToClipboard(text) {
+        const dataF3 = f3Chart.store.getData()
+        console.log(dataF3);
+        // Create a temporary textarea element to copy text
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        // Optionally, show a notification or change button text to inform the user
+        alert("JSON data copied to clipboard!");
+      }
+
+      // function updateTree(famType) {
+      //     console.log('updateTree')
+      //     // Fetch the new data based on the family type
+      //     fetch(`assets/json/${famType}_data.json`)  // Adjust the path as needed
+      //     .then(res => res.json())
+      //     .then(data => {
+      //         // Create the tree with updated data
+      //         create(data);
+      //     })
+      //     .catch(err => console.error('Error fetching updated data:', err));
+      // }
+
+  </script>
+
+</body>
+
+</html>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Abdull Jabbar [HORIZONTAL]</title>
+  <title>Abdull Jabbar</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -40,14 +40,11 @@
   <!-- <script type="module" src="https://unpkg.com/family-chart@0.2.1"></script> -->
   <link rel="stylesheet" href="https://unpkg.com/family-chart@0.2.1/dist/styles/family-chart.css">
 
-  <style>
-      /* #f3Canvas {
+  <!-- <style>
+      #f3Canvas {
         position: absolute !important;
-      } */
-      .filter {
-        background: whitesmoke;
       }
-  </style>
+  </style> -->
 
 </head>
 
@@ -87,7 +84,7 @@
     <!-- <section id="resume" class="resume">
       <div class="container" data-aos="fade-up"> -->
     <section id="silsilah" class="portfolio section-bg">
-      <div class="" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Silsilah</h2>
@@ -98,20 +95,20 @@
           <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
             <ul id="portfolio-flters" class="col-sm-12 d-flex"
                   style="overflow: auto;
-                  justify-content: space-evenly;
+                  justify-content: space-between;
+                  background: whitesmoke;
                   padding: 0px !important;">
-              <li class="filter" onclick="openTree('fam1')">H.Sakur</li>
-              <li class="filter" onclick="openTree('fam2')">Dasirah</li>
-              <li class="filter" onclick="openTree('fam3')">Jamilah</li>
-              <li class="filter" onclick="openTree('fam4')">Asfirah</li>
-              <li class="filter" onclick="openTree('fam5')">Dasiyem</li>
-              <li class="filter" onclick="openTree('fam6')">Dasiah</li>
-              <li class="filter" onclick="openTree('fam7')">Abdul Manan</li>
-              <li class="filter" onclick="openTree('fam8')">Musringah</li>
+              <li class="filter-active" onclick="openTree('fam1')">H.Sakur</li>
+              <li onclick="openTree('fam2')">Dasirah</li>
+              <li onclick="openTree('fam3')">Jamilah</li>
+              <li onclick="openTree('fam4')">Asfirah</li>
+              <li onclick="openTree('fam5')">Dasiyem</li>
+              <li onclick="openTree('fam6')">Dasiah</li>
+              <li onclick="openTree('fam7')">Abdul Manan</li>
+              <li onclick="openTree('fam8')">Musringah</li>
             </ul>
           </div>
         </div>
-        <!-- class="row container f3" -->
         <!-- <div class="row container" data-aos-delay="200" id="viewTree" style="min-height: 600px;"></div> -->
         <div id="familychart" class="row container f3" data-aos-delay="200"
           style="width:100%;
@@ -361,9 +358,22 @@
 
   <!-- Script -->
   <script type="text/javascript">
+    // $(document).ready(function() {
+    //     // Click event for each li
+    //     $("#portfolio-flters li").click(function() {
+    //         // Remove the active class from all li
+    //         $("#portfolio-flters li").removeClass("filter-active");
+            
+    //         // Add the active class to the clicked li
+    //         $(this).addClass("filter-active");
+
+    //         // Call the openTree function with the corresponding argument
+    //         var treeId = $(this).attr('onclick').match(/'([^']+)'/)[1];
+    //         openTree(treeId);
+    //     });
+    // });
     openTree('fam1')
     function openTree(famType) {
-      console.log(famType)
       var thisView = `<div class="col-lg-12 col-sm-12 portfolio-item filter-fam1 disabled-event" id="${famType}">
                           <div class="resume" data-aos="fade-up">
                             <div id="bloked" style="z-index: 1" class="bloked-div"></div>
@@ -377,226 +387,199 @@
       $(`#familychart`).html(thisView)
       $(`#bloked`).hide()
       $(`btn${famType}`).hide()
-      $(`#bloked`).slideDown(1500)
-      $(`btn${famType}`).fadeIn(1500)
+      $(`#bloked`).slideDown(2000)
+      $(`btn${famType}`).fadeIn(2000)
 
-      setTimeout(enableTree, 1500);
       // console.log(famType);
 
       fetch(`assets/json/${famType}_data.json`)  // Adjust the path as needed based on your project structure
-      // fetch('https://drive.google.com/file/d/1nFVhWlYts5tqu0SttdA-7aDG4u7vJRHR/view?usp=sharing')
         .then(res => res.json())
         .then(data => create(data))
         .catch(err => console.error(err));
       }
-      
+
       function create(data) {
         const cont = document.querySelector("#fam-data")
         const store = f3.createStore({
           data,
-          node_separation: 380,
-          level_separation: 150,
-          is_horizontal: false,
+          node_separation: 250,
+          level_separation: 150
         })
         const svg = f3.createSvg(cont)
         const Card = f3.elements.Card({
           store,
           svg,
-          card_dim: {w:330,h:70,text_x:75,text_y:15,img_w:60,img_h:60,img_x:5,img_y:5},
-          card_display: [d => `${d.data["first name"]} ${d.data["last name"]}`],
+          card_dim: { w: 220, h: 70, text_x: 75, text_y: 15, img_w: 60, img_h: 60, img_x: 5, img_y: 5 },
+          card_display: [d => `${d.data["label"]}`, d => d.data["desc"]],
           mini_tree: true,
-          link_break: false,
-          img: true,
+          link_break: false
         })
 
         store.setOnUpdate(props => f3.view(store.getTree(), svg, Card, props || {}))
-        store.updateTree({initial: true})
+        store.updateMainId('Q43274')  // Charles III
+        store.updateTree({ initial: true })
+
+        // with person_id this function will update the tree
+        function updateTreeWithNewMainPerson(person_id, animation_initial = true) {
+          store.updateMainId(person_id)
+          store.updateTree({ initial: animation_initial })
+        }
+
+        // random person
+
+        // d3.select(document.querySelector("#familychart"))
+        //   .append("button")
+        //   .text("Random Person")
+        //   .attr("style", "position: absolute; top: 10px; right: 10px; z-index: 1000;")
+        //   .on("click", () => {
+        //     const random_person = data[Math.floor(Math.random() * data.length)]
+        //     const person_id = random_person["id"]
+        //     updateTreeWithNewMainPerson(person_id, false)
+        //   })
+
+
+        // setup search dropdown
+        // this is basic showcase, please use some autocomplete component and style it as you want
+
+        const all_select_options = []
+        data.forEach(d => {
+          if (all_select_options.find(d0 => d0.value === d["id"])) return
+          all_select_options.push({ label: `${d.data["label"]}`, value: d["id"] })
+        })
+
+        const search_cont = d3.select(document.querySelector("#familychart")).append("div")
+          .attr("style", "position: absolute; top: 10px; left: 10px; width: 150px; z-index: 1000; display:block")
+          .on("focusout", () => {
+            setTimeout(() => {
+              if (!search_cont.node().contains(document.activeElement)) {
+                updateDropdown([]);
+              }
+            }, 200);
+          })
+
+        const search_input = search_cont.append("input")
+          .attr("style", "width: 100%;")
+          .attr("type", "text")
+          .attr("placeholder", "Search")
+          .on("focus", activateDropdown)
+          .on("input", activateDropdown)
+
+        const dropdown = search_cont.append("div").attr("style", "overflow-y: auto; max-height: 300px; background-color: #000;")
+          .attr("tabindex", "0")
+          .on("wheel", (e) => {
+            e.stopPropagation()
+          })
+
+        function activateDropdown() {
+          const search_input_value = search_input.property("value")
+          const filtered_options = all_select_options.filter(d => d.label.toLowerCase().includes(search_input_value.toLowerCase()))
+          updateDropdown(filtered_options)
+        }
+
+        function updateDropdown(filtered_options) {
+          dropdown.selectAll("div").data(filtered_options).join("div")
+            .attr("style", "padding: 5px;cursor: pointer;border-bottom: .5px solid currentColor;")
+            .on("click", (e, d) => {
+              updateTreeWithNewMainPerson(d.value, true)
+            })
+            .text(d => d.label)
+        }
       }
+      
 
       function enableTree(famType) {
         $(`#${famType}`).removeClass("disabled-event")
         $(`#btn${famType}`).html('Tutup')
         $(`#btn${famType}`).attr('onclick', `disabledTree('${famType}')`)
-        $("#bloked").animate( { height:"0%" }, { queue:false, duration:1500 });
-        // $(`#familychart`).style.width = "100vw";
-        // $(`#familychart`).style.height = "100vh";
-        // $(`#familychart`).style.position = "absolute";
-        // $(`#familychart`).style.top = "0";
-        // $(`#familychart`).style.left = "0";
+        $("#bloked").animate( { height:"10%" }, { queue:false, duration:2000 });
       }
 
       function disabledTree(famType) {
         $(`#${famType}`).addClass("disabled-event")
         $(`#btn${famType}`).html('Buka')
         $(`#btn${famType}`).attr('onclick', `enableTree('${famType}')`)
-        $("#bloked").animate( { height:"100%" }, { queue:false, duration:1500 });
+        $("#bloked").animate( { height:"100%" }, { queue:false, duration:2000 });
       }
-
-      
-      // console.log(data)
-
-      // function create(data) {
-      //   const cont = document.querySelector("#fam-data")
-      //   const svg = f3.createSvg(cont)
-
-      //   let tree_data = null;
-      //   let main_id = null;
-
-      //   update()
-
-      //   function update() {
-      //     tree_data = f3.CalculateTree({
-      //       data,
-      //       node_separation: 250,
-      //       level_separation: 150,
-      //       main_id,
-      //       is_horizontal: true
-      //     })
-      //     console.log(data)
-      //     updateSvgHeading(svg, tree_data.data[0].data)
-      //     f3.view(tree_data, svg, Card(onCardClick))
-      //   }
-
-      //   function onCardClick(d) {
-      //     const node = this
-      //     console.log(d)
-      //     main_id = d.data.id;
-      //     update()
-      //   }
-
-      //   function Card(onClick) {
-      //     const card_dim = {w: 220, h: 70}
-
-      //     return function (d) {
-      //       this.innerHTML = ''
-      //       const g = d3.select(this).append('g')
-      //         .attr('transform', `translate(${[-card_dim.w / 2, -card_dim.h / 2]})`)
-      //         .attr('class', 'card').attr('data-id', d.data.id)
-      //         .attr('cursor', 'pointer').on('click', () => onClick.call(this, d))
-
-      //       createRect()
-      //       createText()
-
-      //       function createRect() {
-      //         g.append('rect').attr('width', card_dim.w).attr('height', card_dim.h).attr('rx', 3).attr('ry', 3)
-      //           .attr('fill', d.data.data.gender === 'M' ? 'lightblue' : d.data.data.gender === 'F' ? 'pink' : 'lightgray')
-      //           .attr('stroke', '#000').attr('stroke-width', d.data.main ? 2 : 0)
-      //       }
-
-      //       function createText() {
-      //         g.append('text').attr('transform', `translate(${[20, 70/2+5]})`)
-      //           .text(`${d.data.data['first name']} ${d.data.data['last name']}`)
-      //       }
-      //     }
-      //   }
-
-      //   function updateSvgHeading(svg, main_datum) {
-      //     let svg_heading = d3.select(svg).select('.svg-heading')
-      //     if (!svg_heading.node()) svg_heading = d3.select(svg)
-      //     .append('text').attr('class', 'svg-heading')
-      //     .attr('transform', `translate(${[10, 22]})`)
-      //     .style('fill', '#fff')
-      //     // .style('background', 'red')
-      //     svg_heading.text(`${main_datum.data['first name']} ${main_datum.data['last name']}`)
-      //   }
-      // }
-
-      // #########################
-
-      // ############
-
-      // function create(data) {
-      //   const cont = document.querySelector("#fam-data")
-      //   const store = f3.createStore({
-      //     data,
-      //     node_separation: 250,
-      //     level_separation: 150
-      //   })
-      //   const svg = f3.createSvg(cont)
-      //   const Card = f3.elements.Card({
-      //     store,
-      //     svg,
-      //     card_dim: { w: 220, h: 70, text_x: 75, text_y: 15, img_w: 60, img_h: 60, img_x: 5, img_y: 5 },
-      //     card_display: [d => `${d.data["label"]}`, d => d.data["desc"]],
-      //     mini_tree: true,
-      //     link_break: false
-      //   })
-
-      //   store.setOnUpdate(props => f3.view(store.getTree(), svg, Card, props || {}))
-      //   store.updateMainId('Q43274')  // Charles III
-      //   store.updateTree({ initial: true })
-
-      //   // with person_id this function will update the tree
-      //   function updateTreeWithNewMainPerson(person_id, animation_initial = true) {
-      //     store.updateMainId(person_id)
-      //     store.updateTree({ initial: animation_initial })
-      //   }
-
-      //   // random person
-
-      //   // d3.select(document.querySelector("#familychart"))
-      //   //   .append("button")
-      //   //   .text("Random Person")
-      //   //   .attr("style", "position: absolute; top: 10px; right: 10px; z-index: 1000;")
-      //   //   .on("click", () => {
-      //   //     const random_person = data[Math.floor(Math.random() * data.length)]
-      //   //     const person_id = random_person["id"]
-      //   //     updateTreeWithNewMainPerson(person_id, false)
-      //   //   })
-
-
-      //   // setup search dropdown
-      //   // this is basic showcase, please use some autocomplete component and style it as you want
-
-      //   const all_select_options = []
-      //   data.forEach(d => {
-      //     if (all_select_options.find(d0 => d0.value === d["id"])) return
-      //     all_select_options.push({ label: `${d.data["label"]}`, value: d["id"] })
-      //   })
-
-      //   const search_cont = d3.select(document.querySelector("#familychart")).append("div")
-      //     .attr("style", "position: absolute; top: 10px; left: 10px; width: 150px; z-index: 1000; display:block")
-      //     .on("focusout", () => {
-      //       setTimeout(() => {
-      //         if (!search_cont.node().contains(document.activeElement)) {
-      //           updateDropdown([]);
-      //         }
-      //       }, 200);
-      //     })
-
-      //   const search_input = search_cont.append("input")
-      //     .attr("style", "width: 100%;")
-      //     .attr("type", "text")
-      //     .attr("placeholder", "Search")
-      //     .on("focus", activateDropdown)
-      //     .on("input", activateDropdown)
-
-      //   const dropdown = search_cont.append("div").attr("style", "overflow-y: auto; max-height: 300px; background-color: #000;")
-      //     .attr("tabindex", "0")
-      //     .on("wheel", (e) => {
-      //       e.stopPropagation()
-      //     })
-
-      //   function activateDropdown() {
-      //     const search_input_value = search_input.property("value")
-      //     const filtered_options = all_select_options.filter(d => d.label.toLowerCase().includes(search_input_value.toLowerCase()))
-      //     updateDropdown(filtered_options)
-      //   }
-
-      //   function updateDropdown(filtered_options) {
-      //     dropdown.selectAll("div").data(filtered_options).join("div")
-      //       .attr("style", "padding: 5px;cursor: pointer;border-bottom: .5px solid currentColor;")
-      //       .on("click", (e, d) => {
-      //         updateTreeWithNewMainPerson(d.value, true)
-      //       })
-      //       .text(d => d.label)
-      //   }
-      // }
-      
 
     // }
 
   </script>
+
+  <!-- <script type="text/javascript">
+  openTree('fam1')
+  function openTree(famType) {
+    var thisView = `<div class="col-lg-12 col-sm-12 portfolio-item filter-fam1 disabled-event" id="${famType}">
+                        <div class="resume" data-aos="fade-up">
+                          <div id="bloked" style="z-index: 1" class="bloked-div"></div>
+                          <button class="btn-enabled btn" id="btn${famType}" onclick="enableTree('${famType}')">Buka</button>
+                            <div class="col-lg-12">
+                                <div class="col-lg-12 col-sm-12 f3" id="fam-data"></div>
+                            </div>
+                        </div>
+                    </div>
+                  `
+    $(`#viewTree`).html(thisView)
+    $(`#bloked`).hide()
+    $(`btn${famType}`).hide()
+    $(`#bloked`).slideDown(2000)
+    $(`btn${famType}`).fadeIn(2000)
+
+    const store = f3.createStore({
+      data: data(`data${famType}`),
+      node_separation: 300,
+      level_separation: 150
+    }),
+    view = f3.d3AnimationView({
+      store,
+      cont: document.querySelector(`#fam-data`)
+    }),
+    Card = f3.elements.Card({
+      store,
+      svg: view.svg,
+      card_dim: {
+        w: 250,
+        h: 70,
+        text_x: 75,
+        text_y: 15,
+        img_w: 60,
+        img_h: 60,
+        img_x: 5,
+        img_y: 5
+      },
+      card_display: [
+        (d) => `${d.data["firstName"] || ""} ${d.data["lastName"] || ""}`,
+        (d) => `${d.data["birthday"] || ""} ${d.data["genderDesc"] || ""}`
+      ],
+      mini_tree: true,
+      link_break: false
+    });
+
+    view.setCard(Card);
+    store.setOnUpdate((props) => view.update(props || {}));
+    store.update.tree({ initial: true });
+  }
+
+  function enableTree(famType) {
+    $(`#${famType}`).removeClass("disabled-event")
+    $(`#btn${famType}`).html('Tutup')
+    $(`#btn${famType}`).attr('onclick', `disabledTree('${famType}')`)
+    $("#bloked").animate( { height:"10%" }, { queue:false, duration:2000 });
+
+    // refreshbloked = setTimeout(function(){
+    //   $(`#bloked`).attr('style', 'z-index: 0')
+    //     clearInterval(refreshbloked)
+    // },1500);
+  }
+
+  function disabledTree(famType) {
+    $(`#${famType}`).addClass("disabled-event")
+    $(`#btn${famType}`).html('Buka')
+    $(`#btn${famType}`).attr('onclick', `enableTree('${famType}')`)
+    $("#bloked").animate( { height:"100%" }, { queue:false, duration:2000 });
+
+  }
+
+</script> -->
 
 </body>
 
